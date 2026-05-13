@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Testes (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: ['8.4']
+
+    env:
+      # Flux Pro é um pacote pago — credenciais ficam no secret COMPOSER_AUTH do repositório.
+      # Formato: {"http-basic":{"composer.fluxui.dev":{"username":"<email>","password":"<license-key>"}}}
+      COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, dom, fileinfo, sqlite3, pdo_sqlite, gd, bcmath
+          coverage: none
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-
+
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install & build front-end
+        run: |
+          npm ci
+          npm run build
+
+      - name: Prepare app
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          mkdir -p database && touch database/database.sqlite
+
+      - name: Pint (code style, dry-run)
+        run: vendor/bin/pint --test
+
+      - name: Run tests
+        run: php artisan test

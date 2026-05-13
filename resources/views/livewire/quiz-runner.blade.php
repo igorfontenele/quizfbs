@@ -2,13 +2,13 @@
     @if ($analisando)
         {{-- Tela de loading curta antes do resultado --}}
         <div
-            class="flex flex-col items-center justify-center py-20 text-center"
+            class="flex flex-col items-center justify-center py-24 text-center"
             x-data
-            x-init="setTimeout(() => window.location.assign(@js($resultadoUrl)), 1500)"
+            x-init="setTimeout(() => window.location.assign(@js($resultadoUrl)), 1600)"
         >
-            <flux:icon.loading variant="solid" class="size-10 text-brand-600 dark:text-brand-400" />
-            <flux:heading size="lg" level="2" class="mt-5">Analisando suas respostas...</flux:heading>
-            <flux:subheading>Estamos preparando seu diagnóstico jurídico personalizado.</flux:subheading>
+            <flux:icon.loading variant="solid" class="size-12 text-brand-500" />
+            <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl">Analisando suas respostas...</h2>
+            <p class="mt-2 text-base text-zinc-400">Estamos preparando seu diagnóstico jurídico personalizado.</p>
         </div>
     @else
         <div wire:key="eixo-{{ $eixoAtual }}">
@@ -38,9 +38,9 @@
                 </flux:callout>
             @enderror
 
-            <div class="mt-6 flex items-center gap-3">
+            <div class="mt-7 flex items-center gap-3">
                 @if ($eixoAtual > 1)
-                    <flux:button wire:click="voltar" variant="ghost" icon="arrow-left">Voltar</flux:button>
+                    <flux:button wire:click="voltar" variant="ghost" icon="arrow-left" class="min-h-14">Voltar</flux:button>
                 @endif
 
                 <flux:spacer />
@@ -48,11 +48,11 @@
                 <flux:button
                     wire:click="proximo"
                     variant="primary"
-                    class="min-h-12 text-base"
+                    class="min-h-14 !text-lg !font-semibold"
                     :icon-trailing="$eixoAtual < $this->totalEixos ? 'arrow-right' : 'check'"
                     wire:loading.attr="disabled"
                 >
-                    {{ $eixoAtual < $this->totalEixos ? 'Próximo eixo' : 'Ver meu diagnóstico' }}
+                    {{ $eixoAtual < $this->totalEixos ? 'Próximo' : 'Ver diagnóstico' }}
                 </flux:button>
             </div>
         </div>

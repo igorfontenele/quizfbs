@@ -21,9 +21,9 @@
             <flux:text size="sm" class="text-zinc-500 dark:text-zinc-400">Verde / Amarelo / Vermelho</flux:text>
             <flux:heading size="lg" class="mt-1">
                 <span class="text-lime-600 dark:text-lime-500">{{ $stats['verde'] }}</span>
-                <span class="text-zinc-300 dark:text-zinc-700">/</span>
+                <span class="text-zinc-300 dark:text-zinc-500">/</span>
                 <span class="text-yellow-600 dark:text-yellow-500">{{ $stats['amarelo'] }}</span>
-                <span class="text-zinc-300 dark:text-zinc-700">/</span>
+                <span class="text-zinc-300 dark:text-zinc-500">/</span>
                 <span class="text-red-600 dark:text-red-500">{{ $stats['vermelho'] }}</span>
             </flux:heading>
             <flux:text size="sm" class="mt-0.5 text-zinc-400">distribuição dos diagnósticos</flux:text>
@@ -91,6 +91,17 @@
                         <flux:table.cell>
                             <div class="font-medium text-zinc-800 dark:text-zinc-200">{{ $lead->nome }}</div>
                             <div class="text-xs text-zinc-500 dark:text-zinc-400">{{ $lead->email }}</div>
+                            @if ($lead->telefone)
+                                <div class="text-xs">
+                                    @if ($url = $lead->whatsappUrl())
+                                        <a href="{{ $url }}" target="_blank" rel="noopener" class="text-lime-600 hover:underline dark:text-lime-500">
+                                            {{ $lead->telefone }}
+                                        </a>
+                                    @else
+                                        <span class="text-zinc-500 dark:text-zinc-400">{{ $lead->telefone }}</span>
+                                    @endif
+                                </div>
+                            @endif
                         </flux:table.cell>
                         <flux:table.cell>
                             <div>{{ $lead->empresa }}</div>
@@ -105,10 +116,10 @@
                         </flux:table.cell>
                         <flux:table.cell>{{ $r && $r->pontuacao_total !== null ? $r->pontuacao_total.'/18' : '—' }}</flux:table.cell>
                         <flux:table.cell>
-                            @if ($r?->cartilha_baixada)<flux:icon.check variant="micro" class="text-lime-600" />@else<span class="text-zinc-300 dark:text-zinc-700">—</span>@endif
+                            @if ($r?->cartilha_baixada)<flux:icon.check variant="micro" class="text-lime-600" />@else<span class="text-zinc-300 dark:text-zinc-500">—</span>@endif
                         </flux:table.cell>
                         <flux:table.cell>
-                            @if ($r?->cta_clicado)<flux:icon.check variant="micro" class="text-lime-600" />@else<span class="text-zinc-300 dark:text-zinc-700">—</span>@endif
+                            @if ($r?->cta_clicado)<flux:icon.check variant="micro" class="text-lime-600" />@else<span class="text-zinc-300 dark:text-zinc-500">—</span>@endif
                         </flux:table.cell>
                         <flux:table.cell class="whitespace-nowrap text-xs text-zinc-500 dark:text-zinc-400">
                             {{ $lead->created_at?->format('d/m/Y H:i') }}

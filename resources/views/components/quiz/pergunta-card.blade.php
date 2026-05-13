@@ -4,22 +4,20 @@
     'pergunta',        // ['titulo' => ..., 'enunciado' => ..., 'opcoes' => [0=>...,1=>...,2=>...]]
 ])
 
-<flux:card wire:key="pergunta-{{ $wireKey }}">
-    <div class="mb-3 flex items-start gap-3">
-        <span class="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-semibold text-white dark:bg-brand-500">
+<flux:card wire:key="pergunta-{{ $wireKey }}" class="!p-5 sm:!p-6">
+    <div class="mb-4 flex items-start gap-3">
+        <span class="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-brand-600 text-base font-bold text-white">
             {{ $numero }}
         </span>
         <div>
-            <flux:text size="sm" class="font-semibold uppercase tracking-wide text-brand-600 dark:text-brand-400">
-                {{ $pergunta['titulo'] }}
-            </flux:text>
-            <flux:heading size="md" level="3" class="mt-0.5 leading-snug">{{ $pergunta['enunciado'] }}</flux:heading>
+            <p class="text-xs font-semibold uppercase tracking-widest text-brand-500">{{ $pergunta['titulo'] }}</p>
+            <h3 class="mt-1 text-lg font-semibold leading-snug text-white sm:text-xl">{{ $pergunta['enunciado'] }}</h3>
         </div>
     </div>
 
-    <flux:radio.group wire:model.live="respostas.{{ $wireKey }}" variant="cards" class="!gap-2 max-sm:flex-col">
+    <flux:radio.group wire:model.live="respostas.{{ $wireKey }}" variant="cards" class="!flex-col !gap-2.5">
         @foreach ($pergunta['opcoes'] as $valor => $texto)
-            <flux:radio :value="$valor" :label="$texto" class="min-h-12" />
+            <flux:radio :value="$valor" :label="$texto" class="min-h-14 text-base" />
         @endforeach
     </flux:radio.group>
 </flux:card>

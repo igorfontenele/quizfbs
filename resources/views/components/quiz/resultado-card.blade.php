@@ -30,7 +30,7 @@
             style="width: {{ (int) round(($pontuacao / max(1, $maxPontuacao)) * 100) }}%; background-color: {{ $diag['cor_hex'] }}"
         ></div>
     </div>
-    <div class="mt-1 flex justify-between text-[10px] uppercase tracking-wide text-zinc-400 dark:text-zinc-600">
+    <div class="mt-1 flex justify-between text-[10px] uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
         <span>Maturidade</span>
         <span>Atenção</span>
         <span>Crítico</span>

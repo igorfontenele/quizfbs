@@ -18,6 +18,7 @@ class LeadFactory extends Factory
             'nome' => fake()->name(),
             'empresa' => fake()->company(),
             'email' => fake()->unique()->safeEmail(),
+            'telefone' => '('.fake()->numberBetween(11, 99).') 9'.fake()->numerify('####-####'),
             'area_atuacao' => fake()->randomElement(config('quiz.areas_atuacao')),
             'origem' => config('quiz.origem'),
             'ip' => fake()->ipv4(),

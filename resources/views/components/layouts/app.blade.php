@@ -2,7 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full dark">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    {{-- Totem/kiosk: bloqueia o pinch-zoom para não desconfigurar o layout --}}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#0a0a0a">
     <meta name="color-scheme" content="dark">
@@ -14,7 +15,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="flex min-h-full flex-col bg-zinc-950 text-zinc-200 antialiased">
+<body class="flex min-h-full flex-col bg-zinc-950 text-[16px] text-zinc-200 antialiased sm:text-[17px]">
     @php($__container = $containerClass ?? 'max-w-2xl')
 
     {{-- Faixa de gradiente FBS --}}
@@ -22,9 +23,9 @@
 
     {{-- Navbar preta --}}
     <header class="border-b border-white/10 bg-zinc-950">
-        <div class="relative mx-auto flex {{ $__container }} items-center justify-center px-4 py-3.5">
+        <div class="relative mx-auto flex {{ $__container }} items-center justify-center px-4 py-4">
             <a href="{{ route('home') }}" wire:navigate aria-label="FBS — Fonseca Brasil Serrão Advogados">
-                <img src="{{ asset('images/fbs-white.svg') }}" alt="FBS — Fonseca Brasil Serrão Advogados" class="h-8 w-auto sm:h-9">
+                <img src="{{ asset('images/fbs-white.svg') }}" alt="FBS — Fonseca Brasil Serrão Advogados" class="h-9 w-auto sm:h-10">
             </a>
             @isset($headerActions)
                 <div class="absolute right-4 flex items-center gap-2">{{ $headerActions }}</div>
@@ -32,7 +33,7 @@
         </div>
     </header>
 
-    <div class="mx-auto flex w-full {{ $__container }} flex-1 flex-col px-4 py-8 sm:py-12">
+    <div class="mx-auto flex w-full {{ $__container }} flex-1 flex-col px-5 py-8 sm:px-6 sm:py-12">
         <main class="flex flex-1 flex-col justify-center">
             {{ $slot }}
         </main>
@@ -41,16 +42,19 @@
     {{-- Rodapé preto: parceria Empreende Brazil × FBS --}}
     <footer class="bg-zinc-950 text-white">
         <div class="h-1 w-full bg-gradient-to-r from-fbs-crimson via-fbs-orange to-fbs-gold"></div>
-        <div class="mx-auto flex {{ $__container }} flex-col items-center gap-4 px-4 py-8 text-center">
+        <div class="mx-auto flex {{ $__container }} flex-col items-center gap-4 px-5 py-8 text-center">
             <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
                 <img src="{{ asset('images/empreende-brazil-white.svg') }}" alt="Empreende Brazil" class="h-7 w-auto sm:h-8">
                 <span aria-hidden="true" class="text-lg font-light text-white/25">×</span>
                 <img src="{{ asset('images/fbs-white.svg') }}" alt="FBS — Fonseca Brasil Serrão Advogados" class="h-8 w-auto sm:h-9">
             </div>
-            <p class="text-xs text-white/60">Diagnóstico Jurídico &middot; Empreende Brazil 2026</p>
-            <a href="{{ route('privacidade') }}" class="text-xs text-white/60 underline underline-offset-2 transition hover:text-white" wire:navigate>
+            <p class="text-sm text-white/60">Diagnóstico Jurídico &middot; Empreende Brazil 2026</p>
+            <a href="{{ route('privacidade') }}" class="text-sm text-white/60 underline underline-offset-2 transition hover:text-white" wire:navigate>
                 Política de Privacidade
             </a>
+            <p class="mt-1 text-xs uppercase tracking-wide text-white/35">
+                Desenvolvido Internamente por Fonseca Brasil Serrão
+            </p>
         </div>
     </footer>
 

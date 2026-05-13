@@ -1,23 +1,24 @@
 <div>
     <div class="mb-6 text-center">
         <flux:badge color="red" size="sm" class="mb-3">Diagnóstico concluído</flux:badge>
-        <flux:heading size="lg" level="1">
-            {{ $lead?->nome ? \Illuminate\Support\Str::of($lead->nome)->before(' ')->append(', aqui está seu resultado') : 'Seu resultado' }}
-        </flux:heading>
+        <h1 class="text-2xl font-bold leading-tight text-white sm:text-3xl">
+            {{ $lead?->nome ? \Illuminate\Support\Str::of($lead->nome)->before(' ')->append(',') : 'Pronto!' }}<br>
+            aqui está o seu resultado
+        </h1>
         @if ($lead?->empresa)
-            <flux:subheading>{{ $lead->empresa }}</flux:subheading>
+            <p class="mt-2 text-base text-zinc-400">{{ $lead->empresa }}</p>
         @endif
     </div>
 
     <x-quiz.resultado-card :diag="$diag" :pontuacao="(int) $resposta->pontuacao_total" />
 
-    <flux:card class="mt-6">
+    <flux:card class="mt-6 !p-5 sm:!p-6">
         <div class="flex flex-col gap-4">
             <div class="flex items-start gap-3">
-                <flux:icon.document-arrow-down variant="mini" class="mt-0.5 shrink-0 text-brand-600 dark:text-brand-400" />
+                <flux:icon.document-arrow-down variant="mini" class="mt-0.5 size-5 shrink-0 text-brand-500" />
                 <div>
-                    <flux:heading size="md" level="2">{{ $cartilha['titulo'] }}</flux:heading>
-                    <flux:text size="sm">{{ $cartilha['subtitulo'] }}</flux:text>
+                    <h2 class="text-lg font-bold text-white sm:text-xl">{{ $cartilha['titulo'] }}</h2>
+                    <p class="text-sm text-zinc-400">{{ $cartilha['subtitulo'] }}</p>
                 </div>
             </div>
 
@@ -26,37 +27,37 @@
                 wire:click="marcarCartilhaBaixada"
                 variant="filled"
                 icon="arrow-down-tray"
-                class="w-full"
+                class="min-h-14 w-full !text-base !font-semibold"
             >
                 {{ $diag['cta_texto'] }}
             </flux:button>
         </div>
     </flux:card>
 
-    <flux:separator class="my-7" text="Próximo passo" />
+    <flux:separator class="my-8" text="Próximo passo" />
 
     <flux:callout variant="secondary" icon="chat-bubble-left-right">
-        <flux:callout.text>{{ $fechamento }}</flux:callout.text>
+        <flux:callout.text class="!text-base">{{ $fechamento }}</flux:callout.text>
     </flux:callout>
 
     <flux:button
         :href="$cafeUrl"
         variant="primary"
         icon="calendar-days"
-        class="mt-4 min-h-12 w-full text-base"
+        class="mt-4 min-h-14 w-full !text-lg !font-semibold"
     >
         Café com o Advogado
     </flux:button>
 
-    <div class="mt-8 text-center">
-        <flux:button :href="route('home')" variant="ghost" size="sm" icon="arrow-path" wire:navigate>
+    <div class="mt-10 text-center">
+        <flux:button :href="route('home')" variant="ghost" icon="arrow-path" class="min-h-12" wire:navigate>
             Próximo participante
         </flux:button>
     </div>
 
     @if ($lead?->email)
-        <flux:text size="sm" class="mt-4 text-center text-zinc-400 dark:text-zinc-600">
-            Enviamos uma cópia deste diagnóstico e a cartilha para <span class="font-medium">{{ $lead->email }}</span>.
-        </flux:text>
+        <p class="mt-4 text-center text-sm text-zinc-500">
+            Enviamos uma cópia deste diagnóstico e a cartilha para <span class="font-medium text-zinc-400">{{ $lead->email }}</span>.
+        </p>
     @endif
 </div>

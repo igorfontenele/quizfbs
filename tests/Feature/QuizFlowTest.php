@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Livewire\LeadCapture;
 use App\Livewire\QuizResultado;
 use App\Livewire\QuizRunner;
+use App\Mail\ConfirmacaoPreenchimento;
 use App\Mail\DiagnosticoResultado;
 use App\Models\Lead;
 use App\Models\QuizResposta;
@@ -30,14 +31,16 @@ class QuizFlowTest extends TestCase
         $this->get(route('privacidade'))->assertOk()->assertSee('Política de Privacidade');
     }
 
-    public function test_coleta_de_leads_persiste_e_redireciona_para_o_quiz_assinado(): void
+    public function test_coleta_de_leads_persiste_envia_email_e_redireciona_para_o_quiz_assinado(): void
     {
+        Mail::fake();
         $area = config('quiz.areas_atuacao')[0];
 
         Livewire::test(LeadCapture::class)
             ->set('nome', 'Maria Silva')
             ->set('empresa', 'Acme Ltda')
             ->set('email', 'maria@acme.com.br')
+            ->set('telefone', '(11) 98888-7777')
             ->set('area_atuacao', $area)
             ->set('consentimento_lgpd', true)
             ->call('submit')
@@ -46,8 +49,20 @@ class QuizFlowTest extends TestCase
         $this->assertDatabaseHas('leads', [
             'email' => 'maria@acme.com.br',
             'empresa' => 'Acme Ltda',
+            'telefone' => '(11) 98888-7777',
             'consentimento_lgpd' => true,
         ]);
+
+        Mail::assertQueued(ConfirmacaoPreenchimento::class, fn ($m) => $m->hasTo('maria@acme.com.br'));
+    }
+
+    public function test_lead_capture_exige_todos_os_campos(): void
+    {
+        Livewire::test(LeadCapture::class)
+            ->call('submit')
+            ->assertHasErrors(['nome', 'empresa', 'email', 'telefone', 'area_atuacao', 'consentimento_lgpd']);
+
+        $this->assertDatabaseCount('leads', 0);
     }
 
     public function test_lead_capture_exige_consentimento_lgpd(): void
@@ -56,6 +71,7 @@ class QuizFlowTest extends TestCase
             ->set('nome', 'Maria Silva')
             ->set('empresa', 'Acme Ltda')
             ->set('email', 'maria@acme.com.br')
+            ->set('telefone', '(11) 98888-7777')
             ->set('area_atuacao', config('quiz.areas_atuacao')[0])
             ->set('consentimento_lgpd', false)
             ->call('submit')
@@ -70,6 +86,7 @@ class QuizFlowTest extends TestCase
             ->set('nome', 'Bot')
             ->set('empresa', 'Bot Inc')
             ->set('email', 'bot@bot.com')
+            ->set('telefone', '(11) 90000-0000')
             ->set('area_atuacao', config('quiz.areas_atuacao')[0])
             ->set('consentimento_lgpd', true)
             ->set('website', 'http://spam.example')

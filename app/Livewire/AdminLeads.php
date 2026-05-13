@@ -57,6 +57,7 @@ class AdminLeads extends Component
                     $q->where('nome', 'like', $term)
                         ->orWhere('empresa', 'like', $term)
                         ->orWhere('email', 'like', $term)
+                        ->orWhere('telefone', 'like', $term)
                         ->orWhere('area_atuacao', 'like', $term);
                 });
             })

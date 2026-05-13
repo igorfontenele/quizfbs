@@ -7,10 +7,10 @@
     'eixoNome' => '',
 ])
 
-<div {{ $attributes->merge(['class' => 'mb-6']) }}>
-    <div class="mb-2 flex items-center justify-between">
+<div {{ $attributes->merge(['class' => 'mb-7']) }}>
+    <div class="mb-2.5 flex items-center justify-between">
         <flux:badge color="red" size="sm">Eixo {{ $current }} de {{ $total }}</flux:badge>
-        <flux:text size="sm" class="font-medium text-zinc-500 dark:text-zinc-400">{{ $percent }}%</flux:text>
+        <span class="text-sm font-semibold text-zinc-400">{{ $percent }}%</span>
     </div>
 
     <div class="flex gap-1.5" role="progressbar" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100">
@@ -18,9 +18,9 @@
             @php
                 $w = $i < $current ? 100 : ($i === $current ? (int) round(($respondidasNoEixo / max(1, $perguntasNoEixo)) * 100) : 0);
             @endphp
-            <div class="h-2 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+            <div class="h-2.5 flex-1 overflow-hidden rounded-full bg-zinc-800">
                 <div
-                    class="h-full rounded-full bg-brand-600 transition-all duration-500 ease-out dark:bg-brand-400"
+                    class="h-full rounded-full bg-brand-500 transition-all duration-500 ease-out"
                     style="width: {{ $w }}%"
                 ></div>
             </div>
@@ -28,6 +28,6 @@
     </div>
 
     @if ($eixoNome)
-        <flux:heading size="lg" level="2" class="mt-4">{{ $eixoNome }}</flux:heading>
+        <h2 class="mt-5 text-xl font-bold text-white sm:text-2xl">{{ $eixoNome }}</h2>
     @endif
 </div>

@@ -22,6 +22,7 @@ class AdminController extends Controller
                     ->where('nome', 'like', $term)
                     ->orWhere('empresa', 'like', $term)
                     ->orWhere('email', 'like', $term)
+                    ->orWhere('telefone', 'like', $term)
                     ->orWhere('area_atuacao', 'like', $term));
             })
             ->when($classificacao !== '', function (Builder $q) use ($classificacao) {
@@ -39,7 +40,7 @@ class AdminController extends Controller
             fwrite($out, "\xEF\xBB\xBF");
 
             fputcsv($out, [
-                'ID', 'Nome', 'Empresa', 'E-mail', 'Área de atuação', 'Origem',
+                'ID', 'Nome', 'Empresa', 'E-mail', 'Telefone/WhatsApp', 'Área de atuação', 'Origem',
                 'Consentimento LGPD', 'Criado em',
                 'Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9',
                 'Pontuação', 'Classificação', 'Cartilha baixada', 'Clicou no Café', 'Quiz concluído em',
@@ -53,6 +54,7 @@ class AdminController extends Controller
                         $lead->nome,
                         $lead->empresa,
                         $lead->email,
+                        $lead->telefone,
                         $lead->area_atuacao,
                         $lead->origem,
                         $lead->consentimento_lgpd ? 'Sim' : 'Não',

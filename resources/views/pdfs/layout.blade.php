@@ -7,8 +7,8 @@
         @page { margin: 28mm 20mm 24mm 20mm; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: DejaVu Sans, sans-serif; font-size: 10.5pt; color: #1f2937; line-height: 1.5; }
-        .cover { text-align: center; padding-top: 30mm; }
-        .cover .logo { width: 58mm; margin: 0 auto 12mm; display: block; }
+        .cover { text-align: center; padding-top: 26mm; }
+        .cover .logo { width: 40mm; height: 24mm; margin: 0 auto 12mm; display: block; }
         .cover .eyebrow { letter-spacing: 3px; text-transform: uppercase; font-size: 9pt; color: #bd213f; font-weight: bold; }
         .cover h1 { font-size: 26pt; margin-top: 8mm; color: #111827; }
         .cover h2 { font-size: 13pt; font-weight: normal; color: #6b7280; margin-top: 6mm; }

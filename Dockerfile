@@ -9,9 +9,15 @@
 # ────────────────────────────────────────────────────────────────────────────
 FROM composer:2 AS vendor
 WORKDIR /app
-ARG COMPOSER_AUTH
+# O Railway injeta as variáveis do serviço como build-args; o ENV abaixo torna a
+# COMPOSER_AUTH visível para o `composer install` (autenticação do Flux Pro).
+ARG COMPOSER_AUTH=""
+ENV COMPOSER_AUTH=${COMPOSER_AUTH}
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --no-interaction
+# ext-gd só é necessária em runtime (instalada no estágio final); aqui ignoramos
+# o platform-req para não exigir gd na imagem do Composer.
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --no-interaction \
+    --ignore-platform-req=ext-gd
 COPY . .
 RUN composer dump-autoload --optimize --classmap-authoritative --no-dev \
  && php artisan package:discover --ansi || true

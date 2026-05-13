@@ -29,7 +29,7 @@
         .step b { display: block; font-size: 22pt; color: var(--orange); }
         .url { margin-top: 8mm; font-size: 13pt; color: #71717a; word-break: break-all; }
         .foot { margin-top: auto; padding-top: 10mm; display: flex; align-items: center; gap: 8mm; }
-        .foot .emp { height: 16mm; width: auto; }
+        .foot .emp { height: 12mm; width: auto; }
         .foot .fbs-box { background: #0a0a0a; padding: 3mm 6mm; border-radius: 3mm; display: inline-flex; }
         .foot .fbs-box img { height: 8mm; width: auto; }
         .foot .x { color: #d4d4d8; font-weight: 300; font-size: 16pt; }

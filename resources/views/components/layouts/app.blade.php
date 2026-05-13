@@ -43,10 +43,8 @@
         <div class="h-1 w-full bg-gradient-to-r from-fbs-crimson via-fbs-orange to-fbs-gold"></div>
         <div class="mx-auto flex {{ $__container }} flex-col items-center gap-4 px-4 py-8 text-center">
             <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
-                <span class="rounded-lg bg-white px-4 py-3 shadow-sm">
-                    <img src="{{ asset('images/empreende-brazil.png') }}" alt="Empreende Brazil" class="h-12 w-auto sm:h-14">
-                </span>
-                <span aria-hidden="true" class="text-xl font-light text-white/25">×</span>
+                <img src="{{ asset('images/empreende-brazil-white.svg') }}" alt="Empreende Brazil" class="h-7 w-auto sm:h-8">
+                <span aria-hidden="true" class="text-lg font-light text-white/25">×</span>
                 <img src="{{ asset('images/fbs-white.svg') }}" alt="FBS — Fonseca Brasil Serrão Advogados" class="h-8 w-auto sm:h-9">
             </div>
             <p class="text-xs text-white/60">Diagnóstico Jurídico &middot; Empreende Brazil 2026</p>

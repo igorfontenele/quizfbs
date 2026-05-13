@@ -18,7 +18,11 @@ class QuizResultado extends Component
     /** @var array<string, mixed> */
     public array $diag = [];
 
-    public string $cartilhaUrl = '';
+    /** Versão da cartilha exibida na tela (totem). */
+    public string $cartilhaVerUrl = '';
+
+    /** Download do PDF da cartilha. */
+    public string $cartilhaPdfUrl = '';
 
     public string $cafeUrl = '';
 
@@ -29,19 +33,10 @@ class QuizResultado extends Component
 
         $this->diag = app(QuizClassifierService::class)->classify((int) $resposta->pontuacao_total);
 
-        $this->cartilhaUrl = URL::signedRoute('cartilha.download', [
-            'slug' => $this->diag['cartilha_slug'],
-            'resposta' => $resposta,
-        ]);
-
+        $slug = $this->diag['cartilha_slug'];
+        $this->cartilhaVerUrl = URL::signedRoute('cartilha.ver', ['slug' => $slug, 'resposta' => $resposta]);
+        $this->cartilhaPdfUrl = URL::signedRoute('cartilha.download', ['slug' => $slug, 'resposta' => $resposta]);
         $this->cafeUrl = route('cafe-com-advogado', ['resposta' => $resposta]);
-    }
-
-    public function marcarCartilhaBaixada(): void
-    {
-        if (! $this->resposta->cartilha_baixada) {
-            $this->resposta->forceFill(['cartilha_baixada' => true])->save();
-        }
     }
 
     public function render()

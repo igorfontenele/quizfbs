@@ -174,6 +174,28 @@ class QuizFlowTest extends TestCase
         $this->assertTrue($resposta->fresh()->cartilha_baixada);
     }
 
+    public function test_cartilha_em_tela_renderiza_conteudo_e_marca_flag(): void
+    {
+        $resposta = QuizResposta::factory()->comPontuacao(3)->create(); // verde -> expansao
+        $slug = 'cartilha-de-expansao';
+
+        $this->get(URL::signedRoute('cartilha.ver', ['slug' => $slug, 'resposta' => $resposta]))
+            ->assertOk()
+            ->assertSee('Cartilha de Expansão')
+            ->assertSee('Checklist de Expansão')
+            ->assertSee('propriedade intelectual de Fonseca Brasil Serrão');
+
+        $this->assertTrue($resposta->fresh()->cartilha_baixada);
+    }
+
+    public function test_cartilha_em_tela_exige_url_assinada_e_classificacao_correta(): void
+    {
+        $resposta = QuizResposta::factory()->comPontuacao(3)->create(); // verde -> expansao
+
+        $this->get(route('cartilha.ver', ['slug' => 'cartilha-de-expansao', 'resposta' => $resposta]))->assertForbidden();
+        $this->get(URL::signedRoute('cartilha.ver', ['slug' => 'cartilha-de-gestao-de-riscos', 'resposta' => $resposta]))->assertNotFound();
+    }
+
     public function test_cartilha_errada_para_a_classificacao_da_404(): void
     {
         $resposta = QuizResposta::factory()->comPontuacao(2)->create(); // verde -> expansao

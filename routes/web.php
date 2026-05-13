@@ -29,6 +29,11 @@ Route::get('/diagnostico/resultado/{resposta}', QuizResultado::class)
     ->name('resultado.show')
     ->middleware('signed');
 
+// Cartilha exibida na tela (ideal para o totem) — URL assinada
+Route::get('/cartilha/{slug}/{resposta}/ver', [CartilhaController::class, 'show'])
+    ->name('cartilha.ver')
+    ->middleware('signed');
+
 // Download da cartilha em PDF — URL assinada
 Route::get('/cartilha/{slug}/{resposta}', [CartilhaController::class, 'download'])
     ->name('cartilha.download')

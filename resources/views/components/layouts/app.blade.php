@@ -1,3 +1,8 @@
+@props([
+    'title' => null,
+    'containerClass' => 'max-w-2xl',
+    'headerActions' => null,
+])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full dark">
 <head>

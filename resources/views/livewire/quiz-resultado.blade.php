@@ -15,7 +15,7 @@
     <flux:card class="mt-6 !p-5 sm:!p-6">
         <div class="flex flex-col gap-4">
             <div class="flex items-start gap-3">
-                <flux:icon.document-arrow-down variant="mini" class="mt-0.5 size-5 shrink-0 text-brand-500" />
+                <flux:icon.book-open variant="mini" class="mt-0.5 size-5 shrink-0 text-brand-500" />
                 <div>
                     <h2 class="text-lg font-bold text-white sm:text-xl">{{ $cartilha['titulo'] }}</h2>
                     <p class="text-sm text-zinc-400">{{ $cartilha['subtitulo'] }}</p>
@@ -23,13 +23,15 @@
             </div>
 
             <flux:button
-                :href="$cartilhaUrl"
-                wire:click="marcarCartilhaBaixada"
+                :href="$cartilhaVerUrl"
                 variant="filled"
-                icon="arrow-down-tray"
+                icon="book-open"
                 class="min-h-14 w-full !text-base !font-semibold"
             >
                 {{ $diag['cta_texto'] }}
+            </flux:button>
+            <flux:button :href="$cartilhaPdfUrl" variant="ghost" size="sm" icon="arrow-down-tray" class="w-full">
+                Baixar em PDF
             </flux:button>
         </div>
     </flux:card>

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartilhaController;
 use App\Http\Controllers\QrCodeController;
+use App\Livewire\AdminLeads;
 use App\Livewire\LeadCapture;
 use App\Livewire\QuizResultado;
 use App\Livewire\QuizRunner;
@@ -43,3 +45,9 @@ Route::get('/cafe-com-advogado/{resposta?}', function (?QuizResposta $resposta =
 
 // Página com o QR Code para impressão (A4) — protegida por chave simples
 Route::get('/qr', [QrCodeController::class, 'show'])->name('qr');
+
+// Painel administrativo — HTTP Basic Auth (senha = ADMIN_PASSWORD)
+Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', AdminLeads::class)->name('leads');
+    Route::get('/export', [AdminController::class, 'export'])->name('export');
+});

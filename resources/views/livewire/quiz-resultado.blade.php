@@ -1,6 +1,6 @@
 <div>
     <div class="mb-6 text-center">
-        <flux:badge color="blue" size="sm" class="mb-3">Diagnóstico concluído</flux:badge>
+        <flux:badge color="red" size="sm" class="mb-3">Diagnóstico concluído</flux:badge>
         <flux:heading size="lg" level="1">
             {{ $lead?->nome ? \Illuminate\Support\Str::of($lead->nome)->before(' ')->append(', aqui está seu resultado') : 'Seu resultado' }}
         </flux:heading>

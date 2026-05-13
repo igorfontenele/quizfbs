@@ -1,6 +1,6 @@
 <div>
     <div class="mb-6 text-center">
-        <flux:badge color="blue" size="sm" class="mb-3">Etapa 1 de 2</flux:badge>
+        <flux:badge color="red" size="sm" class="mb-3">Etapa 1 de 2</flux:badge>
         <flux:heading size="lg" level="1">Antes de começar</flux:heading>
         <flux:subheading>Precisamos te identificar para enviar seu diagnóstico e a cartilha.</flux:subheading>
     </div>

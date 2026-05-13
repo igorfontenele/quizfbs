@@ -12,15 +12,21 @@
     --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
-    /* Branding do Empreende Brazil 2026 */
-    --color-brand-50: #eef6ff;
-    --color-brand-100: #d9eaff;
-    --color-brand-200: #bcd9ff;
-    --color-brand-300: #8ec0ff;
-    --color-brand-400: #599cff;
-    --color-brand-500: #3375ff;
-    --color-brand-600: #1d54f5;
-    --color-brand-700: #163fe1;
-    --color-brand-800: #1834b6;
-    --color-brand-900: #19318f;
+    /* ───── Identidade visual FBS ─────
+       Crimson #bd213f · Laranja #f37521 · Dourado #fcb813 (extraídos do logo) */
+    --color-brand-50: #fdf2f4;
+    --color-brand-100: #fce4e9;
+    --color-brand-200: #f8c9d3;
+    --color-brand-300: #f29fae;
+    --color-brand-400: #ea6b82;
+    --color-brand-500: #db3d5b;
+    --color-brand-600: #bd213f; /* crimson principal */
+    --color-brand-700: #9f1c36;
+    --color-brand-800: #851b31;
+    --color-brand-900: #71192e;
+    --color-brand-950: #3e0813;
+
+    --color-fbs-crimson: #bd213f;
+    --color-fbs-orange: #f37521;
+    --color-fbs-gold: #fcb813;
 }

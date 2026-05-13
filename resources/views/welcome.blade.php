@@ -1,6 +1,6 @@
 <x-layouts.app :title="config('app.name') . ' — Diagnóstico Jurídico'">
     <div class="flex flex-col items-center text-center">
-        <flux:badge color="blue" size="sm" class="mb-6">Empreende Brazil 2026</flux:badge>
+        <flux:badge color="red" size="sm" class="mb-6">Empreende Brazil 2026</flux:badge>
 
         <flux:heading size="xl" level="1" class="max-w-lg text-balance">
             Diagnóstico Jurídico da sua Empresa

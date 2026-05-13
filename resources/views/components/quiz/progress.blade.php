@@ -9,7 +9,7 @@
 
 <div {{ $attributes->merge(['class' => 'mb-6']) }}>
     <div class="mb-2 flex items-center justify-between">
-        <flux:badge color="blue" size="sm">Eixo {{ $current }} de {{ $total }}</flux:badge>
+        <flux:badge color="red" size="sm">Eixo {{ $current }} de {{ $total }}</flux:badge>
         <flux:text size="sm" class="font-medium text-zinc-500 dark:text-zinc-400">{{ $percent }}%</flux:text>
     </div>
 

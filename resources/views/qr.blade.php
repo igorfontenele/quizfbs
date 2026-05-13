@@ -17,7 +17,8 @@
             width: 210mm; min-height: 289mm; margin: 0 auto; padding: 18mm 18mm 14mm;
             display: flex; flex-direction: column; align-items: center; text-align: center;
         }
-        .logo-emp { height: 12mm; width: auto; margin-bottom: 4mm; }
+        .logo-fbs-box { display: inline-block; background: #0a0a0a; padding: 3mm 7mm; border-radius: 3mm; margin-bottom: 5mm; }
+        .logo-fbs-box img { height: 9mm; width: auto; display: block; }
         .eyebrow { letter-spacing: .18em; text-transform: uppercase; font-size: 12pt; color: var(--crimson); font-weight: 600; }
         h1 { font-size: 30pt; font-weight: 700; margin-top: 6mm; line-height: 1.15; }
         .lead { font-size: 14pt; color: #52525b; margin-top: 6mm; max-width: 150mm; }
@@ -29,7 +30,7 @@
         .url { margin-top: 8mm; font-size: 13pt; color: #71717a; word-break: break-all; }
         .foot { margin-top: auto; padding-top: 12mm; display: flex; align-items: center; gap: 8mm; }
         .foot .emp { height: 8mm; width: auto; }
-        .foot .fbs-box { background: var(--crimson); padding: 3mm 6mm; border-radius: 3mm; display: inline-flex; }
+        .foot .fbs-box { background: #0a0a0a; padding: 3mm 6mm; border-radius: 3mm; display: inline-flex; }
         .foot .fbs-box img { height: 8mm; width: auto; }
         .foot .x { color: #d4d4d8; font-weight: 300; font-size: 16pt; }
         .print-hint { position: fixed; top: 12px; right: 12px; }
@@ -46,7 +47,7 @@
 
     <div class="bar"></div>
     <div class="sheet">
-        <img class="logo-emp" src="{{ asset('images/empreende-brazil.png') }}" alt="Empreende Brazil">
+        <span class="logo-fbs-box"><img src="{{ asset('images/fbs-white.svg') }}" alt="FBS — Fonseca Brasil Serrão Advogados"></span>
         <div class="eyebrow">Empreende Brazil 2026</div>
         <h1>Faça o Diagnóstico<br>Jurídico da sua Empresa</h1>
         <p class="lead">9 perguntas rápidas em 3 eixos. Em menos de 3 minutos você recebe um diagnóstico e uma cartilha exclusiva.</p>

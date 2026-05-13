@@ -79,8 +79,13 @@ class LeadCapture extends Component
             'consentimento_lgpd' => true,
         ]);
 
-        // E-mail de agradecimento pelo preenchimento (Resend) — enfileirado.
-        Mail::to($lead->email)->queue(new ConfirmacaoPreenchimento($lead));
+        // E-mail de agradecimento pelo preenchimento (Resend). Uma falha aqui não pode
+        // bloquear o usuário — só registramos no log.
+        try {
+            Mail::to($lead->email)->queue(new ConfirmacaoPreenchimento($lead));
+        } catch (\Throwable $e) {
+            report($e);
+        }
 
         // URL assinada para impedir pular direto pro quiz sem passar por aqui.
         return redirect()->to(URL::signedRoute('quiz.run', ['lead' => $lead]));

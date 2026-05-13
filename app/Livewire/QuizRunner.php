@@ -141,8 +141,13 @@ class QuizRunner extends Component
             ]),
         );
 
-        // E-mail assíncrono com o diagnóstico + cartilha em anexo (fila database).
-        Mail::to($this->lead->email)->queue(new DiagnosticoResultado($resposta->fresh('lead')));
+        // E-mail com o diagnóstico + cartilha em anexo. Uma falha de e-mail nunca
+        // pode impedir o usuário de ver o resultado — só registramos no log.
+        try {
+            Mail::to($this->lead->email)->queue(new DiagnosticoResultado($resposta->fresh('lead')));
+        } catch (\Throwable $e) {
+            report($e);
+        }
 
         $this->resultadoUrl = URL::signedRoute('resultado.show', ['resposta' => $resposta]);
         $this->analisando = true;

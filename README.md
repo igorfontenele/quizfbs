@@ -100,8 +100,12 @@ já aponta para ele e configura o health check em `/up`.
    | `ADMIN_PASSWORD` | senha do painel `/admin` (HTTP Basic Auth). Vazio = painel desativado |
    | `QR_ACCESS_KEY` | (opcional) protege a rota `/qr` |
    | `COMPOSER_AUTH` | `{"http-basic":{"composer.fluxui.dev":{"username":"<email-flux>","password":"<license-key>"}}}` — necessário para o build instalar o Flux Pro |
-   | `MAIL_MAILER` | `smtp` (ou `mailgun`/`ses`) |
-   | `MAIL_HOST` / `MAIL_PORT` / `MAIL_USERNAME` / `MAIL_PASSWORD` / `MAIL_FROM_ADDRESS` | conforme seu provedor de e-mail |
+   | `MAIL_MAILER` | `resend` (recomendado) — ou `smtp`/`log` |
+   | `RESEND_API_KEY` | sua chave da [Resend](https://resend.com) (necessária se `MAIL_MAILER=resend`) |
+   | `MAIL_FROM_ADDRESS` | ex.: `diagnostico@fonsecabrasilserrao.com` (o domínio precisa estar verificado na Resend) |
+
+   Dois e-mails são enviados: **(1)** ao preencher o formulário — agradecimento com o logo do FBS;
+   **(2)** ao concluir o quiz — o diagnóstico + a cartilha em PDF.
 
    > As migrations rodam sozinhas no boot do container (`AUTORUN_LARAVEL_MIGRATION=true`),
    > assim como `storage:link` e os caches de config/rotas/views.

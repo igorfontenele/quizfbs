@@ -22,12 +22,12 @@
 
     {{-- Navbar preta --}}
     <header class="border-b border-white/10 bg-zinc-950">
-        <div class="mx-auto flex {{ $__container }} items-center justify-between px-4 py-3.5">
+        <div class="relative mx-auto flex {{ $__container }} items-center justify-center px-4 py-3.5">
             <a href="{{ route('home') }}" wire:navigate aria-label="FBS — Fonseca Brasil Serrão Advogados">
                 <img src="{{ asset('images/fbs-white.svg') }}" alt="FBS — Fonseca Brasil Serrão Advogados" class="h-8 w-auto sm:h-9">
             </a>
             @isset($headerActions)
-                <div class="flex items-center gap-2">{{ $headerActions }}</div>
+                <div class="absolute right-4 flex items-center gap-2">{{ $headerActions }}</div>
             @endisset
         </div>
     </header>

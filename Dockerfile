@@ -45,10 +45,12 @@ RUN install-php-extensions pdo_pgsql pgsql gd
 USER www-data
 
 # Recursos da imagem serversideup: rodam no boot do container.
+# Obs.: NÃO usar MIGRATION_ISOLATION — ela trava num lock na tabela `cache_locks`,
+# que só passa a existir DEPOIS da própria migration (CACHE_STORE=database).
 ENV AUTORUN_ENABLED=true \
     PHP_OPCACHE_ENABLE=1 \
     AUTORUN_LARAVEL_MIGRATION=true \
-    AUTORUN_LARAVEL_MIGRATION_ISOLATION=true \
+    AUTORUN_LARAVEL_MIGRATION_ISOLATION=false \
     AUTORUN_LARAVEL_STORAGE_LINK=true \
     AUTORUN_LARAVEL_CONFIG_CACHE=true \
     AUTORUN_LARAVEL_ROUTE_CACHE=true \

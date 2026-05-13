@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartilhaController;
 use App\Http\Controllers\QrCodeController;
 use App\Livewire\AdminLeads;
+use App\Livewire\AdminLogin;
 use App\Livewire\LeadCapture;
 use App\Livewire\QuizResultado;
 use App\Livewire\QuizRunner;
@@ -51,8 +52,19 @@ Route::get('/cafe-com-advogado/{resposta?}', function (?QuizResposta $resposta =
 // Página com o QR Code para impressão (A4) — protegida por chave simples
 Route::get('/qr', [QrCodeController::class, 'show'])->name('qr');
 
-// Painel administrativo — HTTP Basic Auth (senha = ADMIN_PASSWORD)
-Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', AdminLeads::class)->name('leads');
-    Route::get('/export', [AdminController::class, 'export'])->name('export');
+// Painel administrativo — login por sessão (ADMIN_USERNAME / ADMIN_PASSWORD)
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('login', AdminLogin::class)->name('login');
+
+    Route::post('logout', function () {
+        request()->session()->forget(['admin_authenticated', 'admin_login_at']);
+        request()->session()->regenerate();
+
+        return redirect()->route('admin.login');
+    })->name('logout');
+
+    Route::middleware('admin')->group(function () {
+        Route::get('/', AdminLeads::class)->name('leads');
+        Route::get('export', [AdminController::class, 'export'])->name('export');
+    });
 });

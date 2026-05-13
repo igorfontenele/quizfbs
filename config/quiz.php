@@ -27,10 +27,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Senha do painel administrativo (/admin) — HTTP Basic Auth
+    | Credenciais do painel administrativo em /admin (login por sessão)
     |--------------------------------------------------------------------------
-    | Se vazia, o painel fica indisponível (404).
+    | Se ADMIN_PASSWORD estiver vazia, o painel fica indisponível (404).
     */
+    'admin_username' => env('ADMIN_USERNAME', 'admin'),
     'admin_password' => env('ADMIN_PASSWORD'),
 
     /*

@@ -5,9 +5,15 @@
         $abandonados = max(0, $stats['total'] - $stats['completos']);
     @endphp
 
-    <div class="mb-6">
-        <flux:heading size="lg" level="1">Painel — Diagnóstico Jurídico</flux:heading>
-        <flux:subheading>Leads e respostas captados no Empreende Brazil 2026.</flux:subheading>
+    <div class="mb-6 flex items-start justify-between gap-4">
+        <div>
+            <flux:heading size="lg" level="1">Painel — Diagnóstico Jurídico</flux:heading>
+            <flux:subheading>Leads e respostas captados no Empreende Brazil 2026.</flux:subheading>
+        </div>
+        <form method="POST" action="{{ route('admin.logout') }}" class="shrink-0">
+            @csrf
+            <flux:button type="submit" variant="ghost" size="sm">Sair</flux:button>
+        </form>
     </div>
 
     {{-- Estatísticas --}}

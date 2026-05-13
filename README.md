@@ -21,6 +21,8 @@ em PDF e um CTA para o "Café com o Advogado". O diagnóstico também é enviado
 | `GET /cartilha/{slug}/{resposta}` | Download da cartilha em PDF — **URL assinada** |
 | `GET /cafe-com-advogado/{resposta?}` | Registra o clique no CTA e redireciona |
 | `GET /qr` | Página com o QR Code pronto para impressão A4 (opcionalmente protegida por `?key=`) |
+| `GET /admin` | Painel: leads, estatísticas, respostas — **HTTP Basic Auth** (senha = `ADMIN_PASSWORD`) |
+| `GET /admin/export` | Exporta os leads + respostas em CSV (também protegido) |
 | `GET /up` | Health check (usado pelo Railway) |
 
 As perguntas, opções, mensagens e cartilhas ficam centralizadas em [`config/quiz.php`](config/quiz.php).
@@ -95,6 +97,7 @@ já aponta para ele e configura o health check em `/up`.
    | `SESSION_DRIVER` | `database` |
    | `CACHE_STORE` | `database` |
    | `CAFE_COM_ADVOGADO_URL` | seu link de WhatsApp ou Calendly |
+   | `ADMIN_PASSWORD` | senha do painel `/admin` (HTTP Basic Auth). Vazio = painel desativado |
    | `QR_ACCESS_KEY` | (opcional) protege a rota `/qr` |
    | `COMPOSER_AUTH` | `{"http-basic":{"composer.fluxui.dev":{"username":"<email-flux>","password":"<license-key>"}}}` — necessário para o build instalar o Flux Pro |
    | `MAIL_MAILER` | `smtp` (ou `mailgun`/`ses`) |
